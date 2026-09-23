@@ -100,17 +100,17 @@ main(int argc, char **argv)
                 break;
             case 3: // sw
                 state.mem[state.reg[regA] + offset] = state.reg[regB];
-                state.reg[regA + offset] = state.reg[regB];
                 break;
             case 4: // beq
                 if (state.reg[regA] == state.reg[regB]) {
                     state.pc += offset;
                 }
                 break;
-            case 5: // jalr
+            case 5: // jalr 
+                {int tempAddress = state.reg[regA];
                 state.reg[regB] = state.pc;
-                state.pc = state.reg[regA];
-                break;
+                state.pc = tempAddress;
+                break;}
             case 6: // halt
                 state.reg[0] = 0;
                 state.numInstructionsExecuted++;
